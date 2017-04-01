@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+
+<head>
+    <script src="https://d3js.org/d3.v4.min.js"></script>
+    <style type="text/css">
+        .bottomAxis text {
+            font-size: 3px;
+        }
+
+        .leftAxis text {
+            font-size: 3px;
+        }
+
+        .button {
+            font-size: 4px;
+        }
+
+        .form {
+            font-size: 6px;
+        }
+        
+        #title_line_main{
+            font-size: 64px;
+            text-align: center;
+        }
+        
+        #descript{
+            font-size: 32px;
+            text-align: center;
+        }
+        
+        #wrap {
+            width: 2115px;
+            margin: 0 auto;
+        }
+        
+        #RatioForm1{
+            font-size: 32px;
+        }
+        
+        #FinishedButton{
+            font-size: 32px;
+        }
+        
+        #RatioInput{
+            height: 32px;
+            size: 450;
+            font-size: 32px;
+        }
+        
+    </style>
+    
+</head>
+
+<body>
+    <div id="wrap">
+        
+        <div id="title_line_main"> Experiment: Text Width
+        </div>
+        
+        <div id="descript"> 
+            <p>The following web-page contains two visualisations of a data set collected <br/>
+            from 140 playthroughs of the puzzle game Eukaryote, designed by an MQP team at WPI.</p>
+            
+            <p>Players raced to complete 8 puzzles within a fifteen minute time limit.<br/>
+            Unknowingly, players were assigned one of two tutorial level progressions shown above.</p>
+            
+            <p>Roughly half of players received the one level depicted on the right.<br/>
+                Those who received the second longer tutorial, first played the two easy levels depicted<br/>
+                on the left, and then proceeded to the same level as the other players depicted on the right.</p>
+            
+            <p>During the experiment, player statistics of performance on each level were recorded alongside <br/>
+            a video recording of each player's face to used for AI analysis.</p>
+            
+            <p>From this data the team has generated two hypotheses  about puzzle gameplay:</p>
+            
+             <div id="title_line"> 1: The long level progression provides a smoother learning experience.
+            </div>
+             <div id="title_line"> 2: During gameplay, player's emotions cycle from being frustrated for longer periods<br/>
+                 to being joyful for a short period when the completing  a level.
+            </div>
+            
+            <p>The following Vis attempts to answer the first question: <br/>
+            Is one level progression easier to learn than another?</p>
+
+            <p>In each scatter plot blue represents players who received the longer tutorial, these players<br/>
+                started the game on level -2. <br/>
+                Players who received the longer tutorial can be viewed as orange starting at level 0.<br/>
+                On this vis it is possible to select one of two trend line types with the dropdown below.</p>
+            <div id="title_line"> Vis 1.
+        </div>
+            <p>Trend Line Type:</p>
+        </div>
+        
+        
+        <script src="Experiment.js"></script>
+        
+        <form name="RatioForm" 
+        class="form" action="javascript:void(0);" id="RatioForm1" >
+        Ratio of Marked: <input type="text" id="RatioInput" name="ratio" class="button">
+        <input type="button" id="FinishedButton" class="button" onclick="submitValue()" onkeypress="doNothing()" onkeydown="doNothing()" onekeyup="doNothing()" value="Submit">
+        </form>
+        
+    </div>
+    
+    
+    
+</body>
+
+
+
+
+
+
+
+
+
+
