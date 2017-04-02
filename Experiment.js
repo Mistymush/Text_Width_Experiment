@@ -1,6 +1,6 @@
 //JS file with D3 script
 //Author: August Beers
-var TRIAL_CAP = 60;
+var TRIAL_CAP = 6;
 
 var left_margin = 20;
 var bottom_margin = 15;
@@ -15,15 +15,22 @@ var date_num = date.valueOf();
 
 var ID = date_num % 100000;
 
-var DATA = ["ID,TrialNum,Vis,TruePrecent,ReportedPrecent,\n"];
-var CURRENT_TRUE_VALUE = undefined;
+var DATA = ["ID,TrialNum,Width,Time,Length\n"];
 var TRIAL_NUM = 0;
-var CURRENT_VIS;
+var CURRENT_LENGTH;
+var CURRENT_WIDTH;
 var COMPLEATED = false;
+var START_TIME;
 
 
 var randIntRange = function(min, max){
     return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
+var getTimeMilli = function(){
+    var d = new Date();
+    var n = d.getTime();
+    return n;
 }
 
 
@@ -31,18 +38,25 @@ var tupEquals = function(t1, t2){
     return (t1.x == t2.x) && (t1.y == t2.y);
 }
 
-
-
+var widths = ["100%","50%","25%","15%"];
 
 var displayParagraph = function(){
     d3.select("#descript")
         .select("p").remove();
   
+    var width_index = randIntRange(0, 3);
+    CURRENT_WIDTH = widths[width_index]
+    
+    START_TIME = getTimeMilli();
+    
+    var message = jehu_ps[TRIAL_NUM];
+    
+    CURRENT_LENGTH = message.length;
     
     d3.select("#descript")
         .append("p")
-        .text(jehu_ps[TRIAL_NUM])
-        .style("width", "100%");
+        .text(message)
+        .style("width", CURRENT_WIDTH);
     
     jehu_ps;
 }
@@ -51,46 +65,47 @@ displayParagraph();
 
 var recordData = function(reportedPrecent){
     
+    var time = getTimeMilli() - START_TIME;
+    console.log(time);
+    
+    var trial_num = TRIAL_NUM;
+    
+    if(trial_num != 0)
+        trial_num = trial_num/2;
+    
     var entry_string = ID 
-                +','+ TRIAL_NUM 
-                +','+ CURRENT_VIS
-                +','+ CURRENT_TRUE_VALUE
-                +','+ reportedPrecent
-                +",\n";
+                +','+ trial_num 
+                +','+ CURRENT_WIDTH
+                +','+ time
+                +','+ CURRENT_LENGTH
+                +"\n";
     
     DATA.push(entry_string);
-    
 }
 
 
 //Button Function###############
 var submitValue = function(){
     
-    
-    var message = document.forms["RatioForm"]["ratio"].value;
-    var precent = parseFloat(message);
-    
-    if(message == "" || !precent || precent > 100 || precent < 0){
-        alert("Must fill out ratio field as a two precent < 100 and > 0!")
-        return;
+    if(TRIAL_NUM%2 == 0){
+        console.log("data recorded");
+        recordData();
     }
-    else{
-        recordData(precent);
-        
-        document.forms["RatioForm"].reset();
-        
-        TRIAL_NUM++;
-     
-        //pick next graph
-        if(TRIAL_NUM < TRIAL_CAP) {
-      
-        }
-        else {
-            displayData();
-        }
+       
+    document.forms["RatioForm"].reset();
+
+    TRIAL_NUM++;
+
+    //pick next graph
+    if(TRIAL_NUM < TRIAL_CAP) {
+        displayParagraph();
+    }
+    else {
+        displayData();
+    }
            
         
-    } 
+    
 }
 
 var displayData = function(){
