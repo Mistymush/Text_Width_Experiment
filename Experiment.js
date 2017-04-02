@@ -22,17 +22,6 @@ var CURRENT_VIS;
 var COMPLEATED = false;
 
 
-//Add title######################################
-var AddTitle = function(){
-     svgCont.append("text")
-        .attr("class", "label")
-        .attr("text-anchor", "start")
-        .attr("transform", "translate("+ 5 +",  6 ) ")
-        .style("font-size" , "6")
-        .text("Data Viz Experiment Trial: " + TRIAL_NUM +"/" + TRIAL_CAP);
-}
-
-
 var randIntRange = function(min, max){
     return Math.floor(Math.random() * (max - min + 1)) + min;
 }
@@ -43,7 +32,22 @@ var tupEquals = function(t1, t2){
 }
 
 
-AddTitle();
+
+
+var displayParagraph = function(){
+    d3.select("#descript")
+        .select("p").remove();
+  
+    
+    d3.select("#descript")
+        .append("p")
+        .text(jehu_ps[TRIAL_NUM])
+        .style("width", "100%");
+    
+    jehu_ps;
+}
+
+displayParagraph();
 
 var recordData = function(reportedPrecent){
     
