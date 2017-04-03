@@ -38,14 +38,22 @@ var tupEquals = function(t1, t2){
     return (t1.x == t2.x) && (t1.y == t2.y);
 }
 
-var widths = ["100%","50%","25%","15%"];
+var widths = ["100%","50%","25%"];
 
 var displayParagraph = function(){
     d3.select("#descript")
         .select("p").remove();
   
-    var width_index = randIntRange(0, 3);
+    
+    var width_index = randIntRange(0, widths.length - 1);
+    
     CURRENT_WIDTH = widths[width_index]
+    
+    if(TRIAL_NUM%2 == 0){
+        widths.splice(width_index, 1);
+    }
+   
+    console.log(widths);
     
     START_TIME = getTimeMilli();
     
@@ -66,7 +74,6 @@ displayParagraph();
 var recordData = function(reportedPrecent){
     
     var time = getTimeMilli() - START_TIME;
-    console.log(time);
     
     var trial_num = TRIAL_NUM;
     
@@ -88,7 +95,6 @@ var recordData = function(reportedPrecent){
 var submitValue = function(){
     
     if(TRIAL_NUM%2 == 0){
-        console.log("data recorded");
         recordData();
     }
        
