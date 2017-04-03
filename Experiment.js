@@ -44,7 +44,7 @@ var displayParagraph = function(){
     d3.select("#descript")
         .select("p").remove();
   
-    var width_index = randIntRange(0, 3);
+    var width_index = randIntRange(0, 2);
     CURRENT_WIDTH = widths[width_index]
     
     START_TIME = getTimeMilli();
